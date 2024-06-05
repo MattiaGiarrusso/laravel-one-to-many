@@ -20,7 +20,7 @@ class ProjectsTableSeeder extends Seeder
     {
         for($i = 0; $i < 10; $i++) {
             $newProject = new Project ();
-            $newProject->name = $faker->mimeType();
+            $newProject->name = $faker->company();
             $newProject->slug = Str::slug( $newProject->name, '-');
             $newProject->client_name = $faker->name();
             $newProject->summary = $faker->text(500);
