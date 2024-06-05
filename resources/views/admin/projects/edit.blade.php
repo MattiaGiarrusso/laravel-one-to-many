@@ -27,7 +27,7 @@
         <div class="mb-3">
             <label for="cover_image" class="form-label">Default file input example</label>
             <input class="form-control" type="file" id="cover_image" name="cover_image">
-            @if($post-cover_image)
+            @if($project->cover_image)
                 <div>
                     <img width="150" src="{{ asset('storage/' , $project->cover_image) }}" alt="{{ $project->name }}">
                 </div>                
