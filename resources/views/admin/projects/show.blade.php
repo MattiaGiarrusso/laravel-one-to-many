@@ -24,11 +24,19 @@
         </div>
     @endif
 
-    @if ($project->type)
+    {{-- @if ($project->type)
+        <div>
+            <strong>Tipo di progetto</strong>: {{ $project->type->name }}
+        </div>
+    @else
+        <div>
+            <strong>Tipo di progetto</strong>: non specificato
+        </div>
+    @endif --}}
+
     <div>
-        <strong>Tipo di progetto</strong>: {{ $project->type->name }}
+        <strong>Tipo di progetto</strong>: {{ $project->type ? $project->type->name : 'non specificato' }}
     </div>
-    @endif
 
     <div class="bg-body-secondary rounded p-2 mt-4">
         <div>

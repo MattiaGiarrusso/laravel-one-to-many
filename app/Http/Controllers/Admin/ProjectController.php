@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
 
@@ -130,7 +130,13 @@ class ProjectController extends Controller
         $validator = Validator::make(
             $data,
             [
-                'name' => 'required|min:5|max:200|unique: projects, name',
+                // 'name' => [
+                //     'required',
+                //     'min:5',
+                //     'max:200',
+                //     Rule::unique('projects')->ignore($data)
+                // ],
+                'name' => 'required|min:5|max:200',
                 'summary' => 'required|min:20|max:500',
                 'client_name' => 'required|min:5|max:255',
                 'cover_image' => 'nullable|image|max:250',
@@ -146,9 +152,9 @@ class ProjectController extends Controller
                 'client_name.required' => "Il campo 'Cliente del progetto' è obbligatorio",
                 'client_name.min' => "Il campo 'Cliente del progetto' deve avere almeno 5 caratteri",
                 'client_name.max' => "Il campo 'Cliente del progetto' non può avere più di 255 caratteri",
-                // 'cover_image.image' => "Il file caricato deve essere un immagine",
-                // 'cover_image.max' => "Il file caricato deve essere inferiore a 250kb",
-                // 'type_id.exists' => "Il campo 'Tipo di progetto' selezionato non esiste",
+                'cover_image.image' => "Il file caricato deve essere un immagine",
+                'cover_image.max' => "Il file caricato deve essere inferiore a 250kb",
+                'type_id.exists' => "Il campo 'Tipo di progetto' selezionato non esiste",
             ]
         )->validate();
 
