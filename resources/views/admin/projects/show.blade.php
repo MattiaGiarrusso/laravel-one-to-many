@@ -24,6 +24,12 @@
         </div>
     @endif
 
+    @if ($project->type)
+    <div>
+        <strong>Tipo di progetto</strong>: {{ $project->type->name }}
+    </div>
+    @endif
+
     <div class="bg-body-secondary rounded p-2 mt-4">
         <div>
             <h6>Descrizione del progetto</h6>
