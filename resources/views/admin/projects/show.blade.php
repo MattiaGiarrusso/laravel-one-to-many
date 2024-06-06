@@ -24,16 +24,6 @@
         </div>
     @endif
 
-    {{-- @if ($project->type)
-        <div>
-            <strong>Tipo di progetto</strong>: {{ $project->type->name }}
-        </div>
-    @else
-        <div>
-            <strong>Tipo di progetto</strong>: non specificato
-        </div>
-    @endif --}}
-
     <div>
         <strong>Tipo di progetto</strong>: {{ $project->type ? $project->type->name : 'non specificato' }}
     </div>

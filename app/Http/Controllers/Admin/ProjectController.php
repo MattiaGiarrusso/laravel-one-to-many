@@ -84,7 +84,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view ('admin.projects.edit', compact('project', 'types'));
+        return view ('admin.projects.edit', compact('project','types'));
     }
 
     /**
@@ -130,12 +130,6 @@ class ProjectController extends Controller
         $validator = Validator::make(
             $data,
             [
-                // 'name' => [
-                //     'required',
-                //     'min:5',
-                //     'max:200',
-                //     Rule::unique('projects')->ignore($data)
-                // ],
                 'name' => 'required|min:5|max:200',
                 'summary' => 'required|min:20|max:500',
                 'client_name' => 'required|min:5|max:255',
