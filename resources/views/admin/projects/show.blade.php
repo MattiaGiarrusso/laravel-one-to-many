@@ -20,7 +20,7 @@
 
     @if ($project->cover_image)
         <div>
-            <img src="{{ asset('storage/' , $project->cover_image) }}" alt="{{ $project->name }}">
+            <img src="{{ asset('storage/'. $project->cover_image) }}" alt="{{ $project->name }}">
         </div>
     @endif
 

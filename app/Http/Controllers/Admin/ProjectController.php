@@ -46,21 +46,24 @@ class ProjectController extends Controller
     {
         $formData = $request -> all();
         // $formData['slug'] = Str::slug($formData['name'], '-'); ***metodo alternativo***
-
+        
+        
+        $this->validation($formData);
+        
         if($request->hasFile('cover_image')) {
             $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
-
+            
             $formData['cover_image'] = $img_path;
         }
-
-        $this -> validation($formData);
-
+            
+            
+        // dd($result);
         $newProject = new Project();
         $newProject->fill($formData);
         $newProject->slug = Str::slug($newProject->name, '-');
         $newProject->save();
         
-        return redirect()->route('admin.projects.show', ['project' => $newProject->slug])->with('message', $newProject->name . ' creato con successo.');
+        return redirect()->route('admin.projects.show', ['project' => $newProject->slug]);
 
     }
 
@@ -98,18 +101,19 @@ class ProjectController extends Controller
     {
         $formData = $request->all();
         // $formData['slug'] = Str::slug($formData['name'], '-'); metodo alternativo
+        $this->validation($formData);
+        
         if($request->hasFile('cover_image')) {
             $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
 
             $formData['cover_image'] = $img_path;
         }
 
-        $this->validation($formData);
 
         $project->slug = Str::slug($formData['name'], '-'); 
         $project->update($formData);
 
-        return redirect()-> route('admin.projects.show', ['project'=> $project->slug])->with('message', $project->name . ' aggiornato con successo.');
+        return redirect()-> route('admin.projects.show', ['project'=> $project->slug]);
     }
 
     /**
@@ -122,18 +126,19 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return redirect()->route('admin.projects.index')->with('message', $project->name . ' cancellato con successo.');
+        return redirect()->route('admin.projects.index');
     }
 
 
     private function validation($data) {
+        // dd($data);
         $validator = Validator::make(
             $data,
             [
                 'name' => 'required|min:5|max:200',
                 'summary' => 'required|min:20|max:500',
                 'client_name' => 'required|min:5|max:255',
-                'cover_image' => 'nullable|image|max:250',
+                'cover_image' => 'nullable|image|max:256',
                 'type_id'=> 'nullable|exists:types,id',
             ],
             [
@@ -147,10 +152,12 @@ class ProjectController extends Controller
                 'client_name.min' => "Il campo 'Cliente del progetto' deve avere almeno 5 caratteri",
                 'client_name.max' => "Il campo 'Cliente del progetto' non può avere più di 255 caratteri",
                 'cover_image.image' => "Il file caricato deve essere un immagine",
-                'cover_image.max' => "Il file caricato deve essere inferiore a 250kb",
+                'cover_image.max' => "Il file caricato deve essere inferiore a 256kb",
                 'type_id.exists' => "Il campo 'Tipo di progetto' selezionato non esiste",
             ]
+        // );
         )->validate();
+        // dd($validator);
 
         return $validator;
     }
