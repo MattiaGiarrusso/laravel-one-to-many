@@ -23,7 +23,7 @@
             <td>{{ $project->name }}</td>
             <td>{{ $project->client_name }}</td>
             <td>{{ $project->created_at }}</td>
-            <td>{{ $project->update_at }}</td>
+            <td>{{ $project->updated_at }}</td>
             <td>
                 <div>
                   <a href="{{ route('admin.projects.show', ['project'=> $project->slug]) }}" type="button" class="btn btn-primary ms-btn p-1 badge text-center">Mostra</a>

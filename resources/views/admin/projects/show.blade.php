@@ -4,12 +4,17 @@
 {{-- @include('partials.flash-messages') --}}
 
 <section>
-    <div class="bg-body-secondary rounded d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
         <div class="px-2">
             <h3 class="text-uppercase">{{ $project->name }}</h3>
         </div>
+    @if ($project->cover_image)
+        <div>
+            <img src="{{ asset('storage/'. $project->cover_image) }}" alt="{{ $project->name }}">
+        </div>
+    @endif
     </div>
-    <div class="bg-body-secondary rounded p-2 mt-4">
+    <div class="p-2 mt-4">
         <div class="mt-1">
             <h5>Slug: {{ $project->slug }}</h5>
         </div>
@@ -18,17 +23,12 @@
         </div>
     </div>
 
-    @if ($project->cover_image)
-        <div>
-            <img src="{{ asset('storage/'. $project->cover_image) }}" alt="{{ $project->name }}">
-        </div>
-    @endif
 
-    <div>
+    <div class="p-2 mt-4">
         <strong>Tipo di progetto</strong>: {{ $project->type ? $project->type->name : 'non specificato' }}
     </div>
 
-    <div class="bg-body-secondary rounded p-2 mt-4">
+    <div class="p-2 mt-4">
         <div>
             <h6>Descrizione del progetto</h6>
         </div>
